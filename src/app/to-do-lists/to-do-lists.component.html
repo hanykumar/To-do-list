@@ -1,6 +1,6 @@
 <div class="row">
   <div class="col-lg-6 col-md-6 col-xs-12" style="padding: 20px">
-    <app-edit-task ></app-edit-task>
+    <app-edit-task></app-edit-task>
   </div>
 
   <!-- <div class="col-md-5">
@@ -15,32 +15,57 @@
             </a> 
         </ul>      
   </div> -->
- 
+
   <div class="col-lg-6 col-md-6 col-xs-12 " style="padding: 20px">
-    <div style="text-align: center;">Your Task List</div>
+    <h3 style="text-align: center; margin-top: 0px">Your Task List</h3>
     <hr>
-    <ng-template [ngIf]="tasked.length">
-      <mat-accordion>
-        <mat-expansion-panel *ngFor="let s of tasked; index as i">
-          <mat-expansion-panel-header>
-            <mat-panel-title>
-              {{s?.name}}
-            </mat-panel-title>
-            <!-- <mat-panel-description >
-              {{s?.description}}
-            </mat-panel-description> -->
-          </mat-expansion-panel-header>
-          <p style="font-size: 18px">{{s?.description}}</p>
-          <ng-template [ngIf]="s?.subtasks?.length">
-            <ul>
-              <li *ngFor="let sub of s?.subtasks">{{sub.name}}</li>
-            </ul>
-          </ng-template>
-          <button type="button" mat-raised-button color="primary" (click)="onEditTask(i)">Edit</button>
-          <button mat-raised-button type="button" color="primary" style="margin-left:15px"
-            (click)="onDelete(i)">Delete</button>
-        </mat-expansion-panel>
-      </mat-accordion>
-    </ng-template>
+
+
+    <!-- <ng-template [ngIf]="tasked.length">
+        <mat-accordion cdkDropList [cdkDropListData]="tasked" (cdkDropListDropped)="dropGroup($event)">
+          <mat-expansion-panel cdkDropListGroup class="example-container" *ngFor="let s of tasked; index as ii" cdkDrag
+            [cdkDragData]="s" #panel mouseEnterLeaveDebounce (debounceMouseEnter)="panel.open()"
+            (debounceMouseLeave)="panel.close()">
+            <mat-expansion-panel-header>
+              <mat-panel-title>
+                
+                {{s?.name}}
+              </mat-panel-title>
+            </mat-expansion-panel-header>
+            <ng-template [ngIf]="s?.subtasks?.length">
+              <div cdkDropList class="example-list" id={{s.id}} [cdkDropListData]="s.subtasks"
+                (cdkDropListDropped)="dropItem($event)" [cdkDropListConnectedTo]="getConnectedList()">
+                <div class="example-box" *ngFor="let i of s.subtasks" cdkDrag [cdkDragData]="i">
+                  {{i.name}}
+                </div>
+              </div>
+            </ng-template>
+            <button type="button" mat-raised-button color="primary" (click)="onEditTask(ii)">Edit</button>
+            <button mat-raised-button type="button" color="primary" style="margin-left:15px"
+              (click)="onDelete(ii)">Delete</button>
+            <hr>
+          </mat-expansion-panel>
+        </mat-accordion>
+      </ng-template> -->
+
+
+
+
+    <div cdkDropList [cdkDropListData]="tasked" (cdkDropListDropped)="dropGroup($event)" class="example-container">
+      <div cdkDropListGroup class="example-list" *ngFor="let s of tasked; index as ii" cdkDrag [cdkDragData]="group">
+        <h2>{{s.name}}</h2>
+        {{s.description}}
+        <div cdkDropList class="example-list" id={{s.id}} [cdkDropListData]="s.subtasks"
+          (cdkDropListDropped)="dropItem($event)" [cdkDropListConnectedTo]="getConnectedList()">
+          <div class="example-box" *ngFor="let i of s.subtasks" cdkDrag [cdkDragData]="i">
+            {{i.name}}
+          </div>
+        </div>
+        <button type="button" mat-raised-button color="primary" (click)="onEditTask(ii)">Edit</button>
+        <button mat-raised-button type="button" color="primary" style="margin-left:15px"
+          (click)="onDelete(ii)">Delete</button>
+      </div>
+      <hr>
+    </div>
   </div>
 </div>

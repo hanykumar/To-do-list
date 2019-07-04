@@ -7,6 +7,8 @@ import { ToDoListsComponent } from './to-do-lists/to-do-lists.component';
 import { EditTaskComponent } from './to-do-lists/edit-task/edit-task.component';
 import { taskService } from './to-do-lists/taskService.service';
 import { ReactiveFormsModule } from '@angular/forms';
+import { DragDropModule} from '@angular/cdk/drag-drop';
+import {MouseEnterLeaveDebounceDirective} from './to-do-lists/mouse-enter-leave-debounce.directive';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from '@angular/common/http'
 import {
@@ -21,7 +23,8 @@ import { DataStorageService } from './data-storage.service';
     AppComponent,
     HeaderComponent,
     ToDoListsComponent,
-    EditTaskComponent
+    EditTaskComponent,
+    MouseEnterLeaveDebounceDirective
   ],
   imports: [
     BrowserModule,
@@ -31,7 +34,8 @@ import { DataStorageService } from './data-storage.service';
     MatButtonModule,
     MatInputModule,
     MatExpansionModule,
-    HttpClientModule
+    HttpClientModule,
+    DragDropModule
   ],
   providers: [taskService, DataStorageService, taskService],
   bootstrap: [AppComponent]

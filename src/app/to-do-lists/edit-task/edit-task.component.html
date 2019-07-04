@@ -51,10 +51,9 @@
 </div> -->
 
 <div class="row">
-  <div class="form-group">
-    
-      <div style="text-align: center;">Add Your Tasks</div>
-      <hr>
+  <div class="form-group ">
+    <h3 style="text-align: center; margin-top: 0px">Add Your Tasks</h3>
+    <hr>
     <form [formGroup]="taskForm" (submit)="addTask(ngform1)" #ngform1="ngForm">
       <mat-form-field appearance="outline">
         <mat-label>Task Name</mat-label>
@@ -89,7 +88,7 @@
             style="width: 50%; margin-top:15px">{{isEdit? 'Update': 'Add Task'}}</button>
         </div>
       </div>
-      
+
       <div class="row">
         <div class="col-lg-6 col-md-6 col-xs-12">
           <!-- <button mat-raised-button type="button" color="primary" style="width: 50%;"
@@ -101,6 +100,7 @@
 
         </div>
       </div>
+
     </form>
   </div>
 </div>

@@ -17,6 +17,7 @@ export class EditTaskComponent implements OnInit {
   taskForm: FormGroup;
   isEdit: boolean = false;
   index: number;
+  tasked: Task[];
   constructor(private todolistSL: taskService, private fb: FormBuilder, private cdr: ChangeDetectorRef, private dsS: DataStorageService) { }
 
   ngOnInit() {
@@ -36,7 +37,10 @@ export class EditTaskComponent implements OnInit {
       if (this.isEdit) {
         this.todolistSL.upDateTask(this.index, this.taskForm.value);
       } else {
-        this.todolistSL.addTask(this.taskForm.value);
+        const id = new Date().getTime();
+        const todo = this.taskForm.value;
+        todo.id = id;
+        this.todolistSL.addTask(todo);
       }
       this.isEdit = false;
       formdirective.resetForm();
